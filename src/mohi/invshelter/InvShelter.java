@@ -11,11 +11,11 @@ import cn.nukkit.utils.Config;
 import cn.nukkit.event.player.PlayerDeathEvent;
 
 public class InvShelter extends PluginBase implements Listener {
-	private Config config;
+	private LinkedHashMap<String, Object> config;
 	
 	@Override
 	public void onEnable() {
-		config = (new Config( getDataFolder() + "/config.yml", Config.YAML, new LinkedHashMap<String, Object>() {
+		config = (LinkedHashMap<String, Object>) (new Config( getDataFolder() + "/config.yml", Config.YAML, new LinkedHashMap<String, Object>() {
 			put("Inventory save", true);
 		})).getAll();
 		getServer().getPluginManager().registerEvents( this, this );
