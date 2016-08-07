@@ -15,7 +15,7 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
-import cn.nukkit.event.TextContainer;
+import cn.nukkit.lang.TextContainer;
 
 public class InvShelter extends PluginBase implements Listener {
 	private ConfigSection config;
