@@ -8,33 +8,36 @@ package kr.mohi.invshelter;
 
 import java.util.LinkedHashMap;
 
+import java.util.LinkedHashMap;
+
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerDeathEvent;
-import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
-import cn.nukkit.event.TextContainer;
 
 public class InvShelter extends PluginBase implements Listener {
-	private ConfigSection config;
+	private LinkedHashMap<String, Object> config;
 
+	@SuppressWarnings({ "deprecation", "serial" })
 	@Override
 	public void onEnable() {
-		getDataFolder().mkdir();
-		this.config = (new Config( getDataFolder() + "/config.yml", Config.YAML, new LinkedHashMap<String, Object>() {
-			{
-				put("Inventory save", true);
-			}
-		})).getAll();
-		getServer().getPluginManager().registerEvents( this, this );
+		config = (LinkedHashMap<String, Object>) (new Config(getDataFolder() + "/config.yml", Config.YAML,
+				new LinkedHashMap<String, Object>() {
+					{
+						put("Inventory save", true);
+					}
+				})).getAll();
+		getServer().getPluginManager().registerEvents(this, this);
 	}
 
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
-		if ((boolean) this.config.get("Inventory save")) {
+		if ((Boolean) this.config.get("Inventory save") == true) {
 			event.setKeepInventory(true);
+			return;
 		}
+		return;
 	}
+
 }
